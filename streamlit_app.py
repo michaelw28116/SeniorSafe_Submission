@@ -8,7 +8,7 @@ from datetime import datetime
 import plotly.graph_objects as go
 from openai import OpenAI
 import os
-import speech_recognition as sr
+#import speech_recognition as sr
 from io import BytesIO
 import tempfile
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, AudioProcessorBase, WebRtcMode
@@ -281,32 +281,6 @@ def get_medical_response(user_input):
     )
     return completion.choices[0].message.content
  
-# Function to convert speech to text using SpeechRecognition
-def audio_to_text(audio_file_path):
-    recognizer = sr.Recognizer()
-   
-    with sr.AudioFile(audio_file_path) as source:
-        audio_data = recognizer.record(source)
-    try:
-        # Recognize speech using Google Web Speech API
-        text = recognizer.recognize_google(audio_data)
-        return text
-    except sr.UnknownValueError:
-        return "Sorry, I couldn't understand the audio."
-    except sr.RequestError:
-        return "Sorry, there was an issue with the speech recognition service."
- 
-# Define the audio processor to capture audio via streamlit-webrtc
-class AudioProcessor(AudioProcessorBase):
-    def __init__(self):
-        self.samplerate = 16000
-        self.audio_frames = []
- 
-    def recv_audio(self, frames: np.ndarray):
-        self.audio_frames.append(frames)
- 
-    def get_audio_data(self):
-        return np.concatenate(self.audio_frames, axis=0).astype(np.float32)
  
 # Function to display chatbot interface
 def medical_chatbot():
@@ -315,32 +289,7 @@ def medical_chatbot():
     st.write("Ask me anything related to medical or health concerns, and I'll try my best to assist you!")
    
     # User can input text or record audio directly
-    user_input = st.text_input("Your Question (or leave blank if recording audio)")
- 
-    st.write("You can also record your question as audio:")
- 
-    # Setup WebRTC streamer to capture audio
-    webrtc_ctx = webrtc_streamer(
-        key="audio-stream",
-        mode=WebRtcMode.SENDONLY,
-        audio_processor_factory=AudioProcessor
-    )
- 
-    # Check if audio is recorded
-    if webrtc_ctx.audio_processor:
-        audio_processor = webrtc_ctx.audio_processor
-        if st.button("Process Recorded Audio"):
-            audio_frames = audio_processor.get_audio_data()
-           
-            # Write audio frames to a temporary file
-            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp_file:
-                audio_file_path = tmp_file.name
-                with open(audio_file_path, "wb") as f:
-                    f.write(audio_frames.tobytes())
-           
-            # Convert recorded audio to text
-            user_input = audio_to_text(audio_file_path)
-            st.write(f"**Recognized Speech:** {user_input}")
+    user_input = st.text_input("Your Question")
  
     if user_input:
         with st.spinner("Thinking..."):
