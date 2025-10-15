@@ -2,6 +2,8 @@
 
 SeniorSafe is a revolutionary application designed to ensure the safety and well-being of seniors through advanced technology and user-friendly features. Created by Michael Wei, Michelle Wei, and William Chen, SeniorSafe provides peace of mind for families and caregivers by addressing critical health and safety concerns for older adults. 
 
+[Watch the demo on YouTube](https://www.youtube.com/watch?v=AN5pJgPSthg)
+
 ## Purpose 
 
 Over a quarter of adults over the age of 65 fall in the US each year. Falls can lead to severe injuries such as hip fractures, head trauma, and even death, making it the number one cause of injury for elders. SeniorSafe addresses this urgent need by offering speedy and efficient fall prevention and health monitoring technologies, ensuring your loved ones receive the protection they deserve in any emergency. 
@@ -58,6 +60,5 @@ Michael Wei, Michelle Wei, and William Chen - [Contact Email]
 ## Acknowledgments 
 
 - All contributors who help maintain this project. 
-- Open source community for inspiration. 
-
-Generated from [DocuAI](https://docu-ai-git.vercel.app/) 
+- Open source community for inspiration.
+- Nathan DeMoss (DocuAI) readMe.
