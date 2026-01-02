@@ -55,7 +55,7 @@ Distributed under the MIT License. See LICENSE for more information.
 
 ## Contact 
 
-Michael Wei, Michelle Wei, and William Chen - [Contact Email] 
+Michael Wei, Michelle Wei, and William Chen  
 
 ## Acknowledgments 
 
